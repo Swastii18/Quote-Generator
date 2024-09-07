@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Quote Generator App</title>
+</head>
+<body>
+
+  <h1>Simple Quote Generator</h1>
+
+  <div id="quote-container">
+    <div class="quote-text" id="quote-text">See your daily quote here.</div>
+  </div>
+
+  <div class="quote-catagory">
+    <label>
+      <input type="radio" name="category" value="science" checked> Science
+    </label>
+    <label>
+      <input type="radio" name="category" value="motivational"> Lifestyle
+    </label>
+    <label>
+        <input type="radio" name="category" value="motivational"> Travel
+      </label>
+      <label>
+        <input type="radio" name="category" value="motivational"> Education
+      </label>
+  </div>
+
+  <div class="quote-catagory">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next</button>
+    <button id="random-btn">Generate Randomly</button>
+  </div>
+
+  <div class="font-size-controls">
+    <button id="increase-font">Increase font '+'</button>
+    <button id="decrease-font">Decrease font '-'</button>
+  </div>
+
+  <div class="toggle-button">
+    <input type="checkbox" id="dark-mode-toggle">
+    <span class="slider"></span>
+  </div>
+
+</body>
+</html>
