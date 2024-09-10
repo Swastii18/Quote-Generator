@@ -3,9 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
   <title>Quote Generator</title>
   <style>
+
+    body.light-mode {
+      background-color: #bddbf9;
+      color: #2c2b2b;
+      font-family: 'Tahoma', sans-serif;
+    }
+
+    body.dark-mode {
+      background-color: #1a202d;
+      color: #f0f0f0;
+      font-family: 'Tahoma', sans-serif;
+    }
     .container {
       text-align: center;
       margin: 100px auto;
@@ -15,7 +26,7 @@
 
     h1 {
       font-size: 3rem;
-      color: #2c3e50;
+      color: #364d65;
       margin-bottom: 10px;
     }
 
@@ -25,7 +36,11 @@
       margin-bottom: 40px;
     }
 
-   
+   .text-category{
+    font-size: 1.2rem;
+      color: #606969;
+   }
+
     input, select {
       width: 100%;
       padding: 12px;
@@ -122,7 +137,16 @@
       border-radius: 20px;
     }
 
- 
+    .dark-mode-label{
+      font-size: 1.2rem;
+      color: #606969;
+      }
+      
+    .font-size{
+      font-size: 1.2rem;
+      color: #606969;
+    }
+    
     .font-controls button {
       background-color: #093e61;
     }
@@ -139,7 +163,7 @@
 
  
     <div class="controls">
-      <label for="category">Choose a category:</label>
+      <label for="category" class="text-category">Choose a category:</label>
       <select id="category">
         <option value="science">Science</option>
         <option value="lifestyle">Lifestyle</option>
@@ -175,53 +199,90 @@
 
    
     <div class="controls font-controls">
-      <p>Change Font Size</p>
+      <p class="font-size">Change Font Size</p>
       <button id="increase-font">A+</button>
       <button id="decrease-font">A-</button>
     </div>
   </div>
-=======
-  <title>Simple Quote Generator App</title>
-</head>
-<body>
 
-  <h1>Simple Quote Generator</h1>
+  <script>
+    const quotes = {
+      science: [
+        "Science is a way of thinking much more than it is a body of knowledge.",
+        "The good thing about science is that it's true whether or not you believe in it.",
+        "Science may set limits to knowledge, but should not set limits to imagination.",
+        "The doubter is a true man of science; he doubts only himself and his interpretations, but he believes in science."
+      ],
+      lifestyle: [
+        "You only live once, but if you do it right, once is enough.",
+        "Simplicity is the ultimate sophistication.",
+        "Start each day with a positive thought and a grateful heart."
 
-  <div id="quote-container">
-    <div class="quote-text" id="quote-text">See your daily quote here.</div>
-  </div>
+      ],
+      travel: [
+        "We travel, some of us forever, to seek other states, other lives, other souls.",
+        "Travel far enough, you meet yourself.",
+        "The world is a book and those who do not travel read only one page."
+      ],
+      education: [
+        "Education is the passport to the future, for tomorrow belongs to those who prepare for it today.",
+        "The roots of education are bitter, but the fruit is sweet.",
+        "To educate a person in the mind but not in morals is to educate a menace to society.",
+        "Education is not the filling of a pail, but the lighting of a fire."
+      ]
+    };
 
-  <div class="quote-catagory">
-    <label>
-      <input type="radio" name="category" value="science" checked> Science
-    </label>
-    <label>
-      <input type="radio" name="category" value="motivational"> Lifestyle
-    </label>
-    <label>
-        <input type="radio" name="category" value="motivational"> Travel
-      </label>
-      <label>
-        <input type="radio" name="category" value="motivational"> Education
-      </label>
-  </div>
+    let currentCategory = 'science';
+    let currentQuoteIndex = 0;
 
-  <div class="quote-catagory">
-    <button id="prev-btn">Previous</button>
-    <button id="next-btn">Next</button>
-    <button id="random-btn">Generate Randomly</button>
-  </div>
+    const quoteText = document.getElementById('quote');
+    const categorySelect = document.getElementById('category');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
 
-  <div class="font-size-controls">
-    <button id="increase-font">Increase font '+'</button>
-    <button id="decrease-font">Decrease font '-'</button>
-  </div>
+    function displayQuote() {
+      const selectedQuotes = quotes[currentCategory];
+      quoteText.innerText = selectedQuotes[currentQuoteIndex];
+    }
 
-  <div class="toggle-button">
-    <input type="checkbox" id="dark-mode-toggle">
-    <span class="slider"></span>
-  </div>
+    document.getElementById('generate-btn').addEventListener('click', () => {
+      currentCategory = categorySelect.value;
+      currentQuoteIndex = 0; 
+      displayQuote();
+    });
 
->>>>>>> 4aa03442cd5188023c92df837759b96acc965650
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      const selectedQuotes = quotes[currentCategory];
+      currentQuoteIndex = (currentQuoteIndex > 0) ? currentQuoteIndex - 1 : selectedQuotes.length - 1;
+      displayQuote();
+    });
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      const selectedQuotes = quotes[currentCategory];
+      currentQuoteIndex = (currentQuoteIndex + 1) % selectedQuotes.length;
+      displayQuote();
+    });
+
+    document.getElementById('random-btn').addEventListener('click', () => {
+      const selectedQuotes = quotes[currentCategory];
+      currentQuoteIndex = Math.floor(Math.random() * selectedQuotes.length);
+      displayQuote();
+    });
+
+    darkModeToggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('light-mode');
+    });
+
+    let currentFontSize = 22;
+    document.getElementById('increase-font').addEventListener('click', () => {
+      currentFontSize += 1;
+      quoteText.style.fontSize = `${currentFontSize}px`;
+    });
+
+    document.getElementById('decrease-font').addEventListener('click', () => {
+      currentFontSize -= 1;
+      quoteText.style.fontSize = `${currentFontSize}px`;
+    });
+  </script>
 </body>
 </html>
